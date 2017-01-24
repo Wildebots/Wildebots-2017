@@ -33,6 +33,19 @@ public class DriveSystem extends Subsystem {
 		rightMotorController.setSpeed(speed);
 	}
 	
+	/*
+	 * Debug: Sets the speed of the left
+	 * and right motors
+	 * 
+	 * left = left speed, -1 to 1
+	 * right = right motor speed, -1 to 1
+	 */
+	public static void setMotorSpeeds(double left, double right) 
+	{
+		leftMotorController.set(left);
+		rightMotorController.set(right);
+	}
+	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());

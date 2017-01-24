@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team4902.robot.commands.*;
 import org.usfirst.frc.team4902.robot.subsystems.*;
 
@@ -19,7 +18,7 @@ public class Robot extends IterativeRobot {
 	public static Joystick joystick = new Joystick(1);
 	
 	Command autonomousCommand;
-	DriveCommand driveForwardAndBack;
+	DriveCommand driveCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	
 	@Override
@@ -64,7 +63,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		}
 		
-		Scheduler.getInstance().add(driveForwardAndBack);
+		Scheduler.getInstance().add(driveCommand);
 	}
 
 
