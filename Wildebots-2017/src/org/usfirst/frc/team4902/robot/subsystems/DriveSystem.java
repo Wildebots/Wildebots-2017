@@ -1,4 +1,7 @@
 package org.usfirst.frc.team4902.robot.subsystems;
+import org.usfirst.frc.team4902.robot.commands.DriveCommand;
+
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -10,44 +13,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveSystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private static Talon leftMotorController = new Talon(0);
-	private static Talon rightMotorController = new Talon(0);
+	private Talon leftMotorController = new Talon(0);
+	private Talon rightMotorController = new Talon(1	);
 	
-	public static void rotateRobot(double degrees)
-	{
+	private RobotDrive drive = new RobotDrive(leftMotorController, rightMotorController);
+	
+	public RobotDrive getDrive() {
+		return drive;
+	}
 		
-	}
-	
-	/*
-	 * Drive the robot forward and back.
-	 * Mainly used for testing as the actual
-	 * Driving is done using the move() function
-	 * 
-	 * Speed - Speed of movement from -1 to 1
-	 * -1 moves back at full speed, while 1 moves
-	 * forward at full speed.
-	 */
-	public static void driveForwardBack(double speed)
-	{
-		leftMotorController.setSpeed(speed);
-		rightMotorController.setSpeed(speed);
-	}
-	
-	/*
-	 * Debug: Sets the speed of the left
-	 * and right motors
-	 * 
-	 * left = left speed, -1 to 1
-	 * right = right motor speed, -1 to 1
-	 */
-	public static void setMotorSpeeds(double left, double right) 
-	{
-		leftMotorController.set(left);
-		rightMotorController.set(right);
-	}
-	
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new DriveCommand());
 	}
 }

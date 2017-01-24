@@ -2,6 +2,8 @@ package org.usfirst.frc.team4902.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team4902.robot.Robot;
 import org.usfirst.frc.team4902.robot.subsystems.*;
 /**
  *
@@ -11,6 +13,7 @@ public class DriveCommand extends Command {
 	
 	public DriveCommand() {
 		// Use requires() here to declare subsystem dependencies
+		requires(Robot.driveSystem);
 	}
 
 	// Called just before this Command runs the first time
@@ -21,7 +24,7 @@ public class DriveCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		DriveSystem.setMotorSpeeds(joystick.getY() - joystick.getX(), joystick.getY() + joystick.getX());
+		Robot.driveSystem.getDrive().arcadeDrive(Robot.joystick);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

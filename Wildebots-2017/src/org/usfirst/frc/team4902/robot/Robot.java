@@ -15,7 +15,8 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static DriverStation driverStation = DriverStation.getInstance();
-	public static Joystick joystick = new Joystick(1);
+	public static Joystick joystick = new Joystick(0);
+	public static DriveSystem driveSystem = new DriveSystem();
 	
 	Command autonomousCommand;
 	DriveCommand driveCommand;
@@ -69,8 +70,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() 
-	{	
-		
+	{
+		Scheduler.getInstance().run();
 	}
 
 
