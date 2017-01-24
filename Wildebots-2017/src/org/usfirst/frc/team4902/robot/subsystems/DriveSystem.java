@@ -14,9 +14,9 @@ public class DriveSystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	private Talon leftMotorController = new Talon(0);
-	private Talon rightMotorController = new Talon(1	);
+	private Talon rightMotorController = new Talon(1);
 	
-	private RobotDrive drive = new RobotDrive(leftMotorController, rightMotorController);
+	private RobotDrive drive = new RobotDrive(leftMotorController, null, rightMotorController, null);
 	
 	public RobotDrive getDrive() {
 		return drive;

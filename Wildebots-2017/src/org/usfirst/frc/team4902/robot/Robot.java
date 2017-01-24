@@ -25,6 +25,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		SmartDashboard.putBoolean("DB/Button 0", false);
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
