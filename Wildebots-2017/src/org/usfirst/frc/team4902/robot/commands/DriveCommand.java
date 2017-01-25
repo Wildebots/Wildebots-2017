@@ -1,16 +1,14 @@
 package org.usfirst.frc.team4902.robot.commands;
 
+import org.usfirst.frc.team4902.robot.Input;
+import org.usfirst.frc.team4902.robot.Robot;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team4902.robot.Robot;
-import org.usfirst.frc.team4902.robot.subsystems.*;
 /**
  *
  */
 public class DriveCommand extends Command {
-	Joystick joystick = new Joystick(0);
 	
 	public DriveCommand() {
 		// Use requires() here to declare subsystem dependencies
@@ -25,10 +23,11 @@ public class DriveCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		if (SmartDashboard.getBoolean("DB/Button 0", false)) {
-			Robot.driveSystem.getDrive().tankDrive(joystick.getRawAxis(1), joystick.getRawAxis(5));
+		System.out.println(Robot.driveType.get());
+		if (Robot.driveType.get()/*SmartDashboard.getBoolean("DB/Button 0", true)*/) {
+			Robot.driveSystem.getDrive().tankDrive(Input.getPrimaryInstance().getRawAxis(1), Input.getPrimaryInstance().getRawAxis(5));
 		} else {
-			Robot.driveSystem.getDrive().arcadeDrive(Robot.joystick);
+			Robot.driveSystem.getDrive().arcadeDrive(Input.getPrimaryInstance().getJoystick());
 		}
 	}
 

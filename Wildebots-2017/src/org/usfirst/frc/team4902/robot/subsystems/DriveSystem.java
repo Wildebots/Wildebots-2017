@@ -13,10 +13,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveSystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private Talon leftMotorController = new Talon(0);
-	private Talon rightMotorController = new Talon(1);
+	private Talon leftfront = new Talon(0),
+			leftback = new Talon(1),
+			rightfront = new Talon(2),
+			rightback = new Talon(3);
 	
-	private RobotDrive drive = new RobotDrive(leftMotorController, null, rightMotorController, null);
+	private RobotDrive drive = new RobotDrive(leftback, leftfront, rightback, rightfront);
+	
+	public DriveSystem() {
+		leftfront.setInverted(true);
+		leftback.setInverted(true);
+	}
 	
 	public RobotDrive getDrive() {
 		return drive;
