@@ -23,6 +23,8 @@ public class DriveSystem extends Subsystem {
 	public DriveSystem() {
 		leftfront.setInverted(true);
 		leftback.setInverted(true);
+		rightfront.setInverted(true);
+		rightback.setInverted(true);
 	}
 	
 	public RobotDrive getDrive() {

@@ -2,17 +2,12 @@ package org.usfirst.frc.team4902.robot;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.usfirst.frc.team4902.robot.EventSystem.HandlerType;
-import org.usfirst.frc.team4902.robot.commands.DriveCommand;
-import org.usfirst.frc.team4902.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4902.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team4902.robot.subsystems.ExampleSubsystem;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
@@ -21,10 +16,9 @@ public class Robot extends IterativeRobot {
 	public static DriverStation driverStation = DriverStation.getInstance();
 	public static DriveSystem driveSystem = new DriveSystem();
 	
-	public static AtomicBoolean driveType = new AtomicBoolean(false);
+	public static AtomicBoolean driveType = new AtomicBoolean(false), enabled = new AtomicBoolean(true);
 	
-	DriveCommand driveCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+//	DriveCommand driveCommand;
 	
 	@Override
 	public void robotInit() {
@@ -34,6 +28,14 @@ public class Robot extends IterativeRobot {
 //		SmartDashboard.putData("Auto mode", chooser);
 		EventSystem.getInstance().addHandler(() -> driveType.set(!driveType.get()),
 				Input.getPrimaryInstance().getButtonY(), HandlerType.OnPress);
+		EventSystem.getInstance().addHandler(() -> {
+			if (enabled.get()) {
+				Scheduler.getInstance().disable();
+			} else {
+				Scheduler.getInstance().enable();
+			}
+			enabled.set(!enabled.get());
+		}, Input.getPrimaryInstance().getButtonX(), HandlerType.OnPress);
 	}
 	
 	@Override
@@ -71,7 +73,7 @@ public class Robot extends IterativeRobot {
 //			autonomousCommand.cancel();
 //		}
 //		
-		Scheduler.getInstance().add(driveCommand);
+//		Scheduler.getInstance().add(driveCommand);
 	}
 
 
