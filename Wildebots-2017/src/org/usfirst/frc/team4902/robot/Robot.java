@@ -5,13 +5,12 @@ import org.usfirst.frc.team4902.robot.EventSystem.HandlerType;
 import org.usfirst.frc.team4902.robot.commands.Autonomous;
 import org.usfirst.frc.team4902.robot.commands.Rotate;
 import org.usfirst.frc.team4902.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team4902.robot.subsystems.VisionSystem;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,7 +18,7 @@ public class Robot extends IterativeRobot {
 	
 	public static final boolean DEBUG = true;
 
-	public static OI oi;
+//	public static OI oi;
 	public static DriverStation driverStation = DriverStation.getInstance();
 	public static DriveSystem driveSystem = new DriveSystem();
 	
@@ -31,8 +30,9 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void robotInit() {
-		oi = new OI();
+//		oi = new OI();
 		gyro = new ADXRS450_Gyro();
+		VisionSystem.start();
 		EventSystem.getInstance().addHandler(() -> driveSystem.driveType.set(!driveSystem.driveType.get()),
 				Input.getPrimaryInstance().getButtonY(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> {

@@ -22,6 +22,10 @@ public class Autodrive extends Command {
 	@Override
 	protected void initialize() {
 		setTimeout(duration);
+	}
+	
+	@Override
+	protected void execute() {
 		Robot.driveSystem.getDrive().tankDrive(leftspeed, rightspeed);
 	}
 	
