@@ -23,7 +23,6 @@ public class DriveCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		System.out.println(Robot.driveSystem.driveType.get());
 		if (Robot.driveSystem.driveType.get()/*SmartDashboard.getBoolean("DB/Button 0", true)*/) {
 			Robot.driveSystem.getDrive().tankDrive(Input.getPrimaryInstance().getRawAxis(1), Input.getPrimaryInstance().getRawAxis(5));
 		} else {

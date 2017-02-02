@@ -3,6 +3,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.usfirst.frc.team4902.robot.commands.DriveCommand;
 
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *Interacts with move commands and any additional commands that
  *Affect movement
  */
-public class DriveSystem extends Subsystem {
+public class DriveSystem extends Subsystem implements PIDOutput {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	private Talon leftfront = new Talon(0),
@@ -20,9 +21,10 @@ public class DriveSystem extends Subsystem {
 			rightfront = new Talon(2),
 			rightback = new Talon(3);
 	
-	//true = arcade
-	//false = tank
-	public AtomicBoolean driveType = new AtomicBoolean(true);
+	//true = tank
+	//false = false
+	//arcade by default
+	public AtomicBoolean driveType = new AtomicBoolean(false);
 	
 	private RobotDrive drive = new RobotDrive(leftback, leftfront, rightback, rightfront);
 	
@@ -33,11 +35,20 @@ public class DriveSystem extends Subsystem {
 		rightback.setInverted(true);
 	}
 	
+	public void stop() {
+		drive.tankDrive(0, 0);
+	}
+	
 	public RobotDrive getDrive() {
 		return drive;
 	}
 		
 	public void initDefaultCommand() {
 		setDefaultCommand(new DriveCommand());
+	}
+
+	@Override
+	public void pidWrite(double output) {
+		drive.tankDrive(-output, output);
 	}
 }

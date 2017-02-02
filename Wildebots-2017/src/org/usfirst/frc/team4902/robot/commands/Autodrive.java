@@ -27,7 +27,7 @@ public class Autodrive extends Command {
 	
 	@Override
 	protected void end() {
-		Robot.driveSystem.getDrive().tankDrive(0, 0);
+		Robot.driveSystem.stop();
 	}
 
 	@Override
