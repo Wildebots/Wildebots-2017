@@ -16,7 +16,7 @@ public class Robot extends IterativeRobot {
 	public static DriverStation driverStation = DriverStation.getInstance();
 	public static DriveSystem driveSystem = new DriveSystem();
 	
-	public static AtomicBoolean driveType = new AtomicBoolean(false), enabled = new AtomicBoolean(true);
+	public static AtomicBoolean enabled = new AtomicBoolean(true);
 	
 //	DriveCommand driveCommand;
 	
@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("DB/Button 1", false);
 //		chooser.addDefault("Default Auto", new ExampleCommand());
 //		SmartDashboard.putData("Auto mode", chooser);
-		EventSystem.getInstance().addHandler(() -> driveType.set(!driveType.get()),
+		EventSystem.getInstance().addHandler(() -> driveSystem.driveType.set(!driveSystem.driveType.get()),
 				Input.getPrimaryInstance().getButtonY(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> {
 			if (enabled.get()) {

@@ -1,4 +1,6 @@
 package org.usfirst.frc.team4902.robot.subsystems;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.usfirst.frc.team4902.robot.commands.DriveCommand;
 
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -17,6 +19,10 @@ public class DriveSystem extends Subsystem {
 			leftback = new Talon(1),
 			rightfront = new Talon(2),
 			rightback = new Talon(3);
+	
+	//true = arcade
+	//false = tank
+	public AtomicBoolean driveType = new AtomicBoolean(true);
 	
 	private RobotDrive drive = new RobotDrive(leftback, leftfront, rightback, rightfront);
 	
