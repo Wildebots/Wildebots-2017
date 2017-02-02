@@ -4,9 +4,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.usfirst.frc.team4902.robot.EventSystem.HandlerType;
 import org.usfirst.frc.team4902.robot.subsystems.DriveSystem;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -18,6 +21,8 @@ public class Robot extends IterativeRobot {
 	
 	public static AtomicBoolean enabled = new AtomicBoolean(true);
 	
+	public static ADXRS450_Gyro gyro;
+	
 //	DriveCommand driveCommand;
 	
 	@Override
@@ -26,6 +31,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("DB/Button 1", false);
 //		chooser.addDefault("Default Auto", new ExampleCommand());
 //		SmartDashboard.putData("Auto mode", chooser);
+		gyro = new ADXRS450_Gyro();
 		EventSystem.getInstance().addHandler(() -> driveSystem.driveType.set(!driveSystem.driveType.get()),
 				Input.getPrimaryInstance().getButtonY(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> {
@@ -40,7 +46,7 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void disabledInit() {
-
+		
 	}
 
 	@Override
