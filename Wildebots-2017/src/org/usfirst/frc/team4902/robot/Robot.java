@@ -32,7 +32,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 //		oi = new OI();
 		gyro = new ADXRS450_Gyro();
-		VisionSystem.start();
+//		VisionSystem.start();
 		EventSystem.getInstance().addHandler(() -> driveSystem.driveType.set(!driveSystem.driveType.get()),
 				Input.getPrimaryInstance().getButtonY(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> {

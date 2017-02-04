@@ -27,8 +27,8 @@ public class Autonomous extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new Autodrive(0.5, 0.5, 10));
-    	addSequential(new Rotate(Robot.gyro.getAngle()+45));
+    	addSequential(new Autodrive(0.5, 0.5, 3));
+    	addSequential(new Rotate(90));
     	
     }
 }
