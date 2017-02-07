@@ -15,41 +15,44 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
-	
-//	public static final boolean DEBUG = true;
 
-//	public static OI oi;
+	//	public static OI oi;
 	public static DriverStation driverStation = DriverStation.getInstance();
 	public static DriveSystem driveSystem = new DriveSystem();
-	
+
 	public static AtomicBoolean enabled = new AtomicBoolean(true);
-	
-	public static ADXRS450_Gyro gyro;
-	
-//	DriveCommand driveCommand;
-	
+
+	public static ADXRS450_Gyro gyro;  
+
+	//	DriveCommand driveCommand;
+
 	@Override
 	public void robotInit() {
-//		oi = new OI();
+		//		oi = new OI();
 		gyro = new ADXRS450_Gyro();
-//		VisionSystem.start();
+		//		VisionSystem.start();
+		SmartDashboard.putString("DB/String 0", "Robot Enabled");
 		EventSystem.getInstance().addHandler(() -> driveSystem.driveType.set(!driveSystem.driveType.get()),
 				Input.getPrimaryInstance().getButtonY(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> {
-			if (enabled.get()) {
-				Scheduler.getInstance().disable();
-			} else {
-				Scheduler.getInstance().enable();
+			if (!this.isDisabled()) {
+				if (enabled.get()) {
+					Scheduler.getInstance().disable();
+					SmartDashboard.putString("DB/String 0", "Robot Disabled");
+				} else {
+					Scheduler.getInstance().enable();
+					SmartDashboard.putString("DB/String 0", "Robot Enabled");
+				}
+				enabled.set(!enabled.get());
 			}
-			enabled.set(!enabled.get());
 		}, Input.getPrimaryInstance().getButtonX(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> new Rotate(gyro.getAngle()+45).start(),
 				Input.getPrimaryInstance().getButtonB(), HandlerType.OnPress);
 	}
-	
+
 	@Override
 	public void disabledInit() {
-		
+
 	}
 
 	@Override
@@ -59,13 +62,13 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-//		autonomousCommand = chooser.getSelected();
-//
-//		// schedule the autonomous command (example)
-//		if (autonomousCommand != null)
-//			autonomousCommand.start();
+		//		autonomousCommand = chooser.getSelected();
+		//
+		//		// schedule the autonomous command (example)
+		//		if (autonomousCommand != null)
+		//			autonomousCommand.start();
 		new Autonomous().start();
-//		Scheduler.getInstance().add(new Autonomous());
+		//		Scheduler.getInstance().add(new Autonomous());
 	}
 
 	/**
@@ -79,12 +82,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() 
 	{
-//		if (autonomousCommand != null)
-//		{
-//			autonomousCommand.cancel();
-//		}
-//		
-//		Scheduler.getInstance().add(driveCommand);
+		//		if (autonomousCommand != null)
+		//		{
+		//			autonomousCommand.cancel();
+		//		}
+		//		
+		//		Scheduler.getInstance().add(driveCommand);
 	}
 
 
@@ -94,7 +97,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		if (isDebug()) System.out.println(gyro.getAngle());
 	}
- 
+
 	/**
 	 * @return if the robot is in debug mode or not, defaults to false
 	 * enable debug mode by pressing the first button in the basic tab
