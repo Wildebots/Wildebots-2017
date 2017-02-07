@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 	
-	public static final boolean DEBUG = true;
+//	public static final boolean DEBUG = true;
 
 //	public static OI oi;
 	public static DriverStation driverStation = DriverStation.getInstance();
@@ -92,9 +92,16 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() 
 	{
 		Scheduler.getInstance().run();
-		if (DEBUG) SmartDashboard.putData("Gyro", gyro);
+		if (isDebug()) System.out.println(gyro.getAngle());
 	}
-
+ 
+	/**
+	 * @return if the robot is in debug mode or not, defaults to false
+	 * enable debug mode by pressing the first button in the basic tab
+	 */
+	public static boolean isDebug() {
+		return SmartDashboard.getBoolean("DB/Button 0", false);
+	}
 
 	@Override
 	public void testPeriodic() {
