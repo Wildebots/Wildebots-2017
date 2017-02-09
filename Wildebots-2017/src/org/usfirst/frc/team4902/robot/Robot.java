@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.usfirst.frc.team4902.robot.EventSystem.HandlerType;
 import org.usfirst.frc.team4902.robot.commands.Autonomous;
 import org.usfirst.frc.team4902.robot.commands.Rotate;
+import org.usfirst.frc.team4902.robot.commands.WinchCommand;
 import org.usfirst.frc.team4902.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4902.robot.subsystems.VisionSystem;
 import org.usfirst.frc.team4902.robot.subsystems.WinchSystem;
@@ -55,7 +56,7 @@ public class Robot extends IterativeRobot {
 		}, Input.getPrimaryInstance().getButtonX(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> new Rotate(gyro.getAngle()+45).start(),
 				Input.getPrimaryInstance().getButtonB(), HandlerType.OnPress);
-		EventSystem.getInstance().addHandler(() -> currentCount.set(!currentCount.get()),
+		EventSystem.getInstance().addHandler(() -> new WinchCommand().start(),
 				Input.getPrimaryInstance().getButtonA(), HandlerType.OnPress);
 	}
 
@@ -104,7 +105,6 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() 
 	{
 		Scheduler.getInstance().run();
-		if (isDebug() && currentCount.get()) System.out.println("current: "+pdp.getCurrent(0));
 	}
 
 	/**

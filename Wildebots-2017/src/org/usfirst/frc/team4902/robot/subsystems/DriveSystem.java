@@ -18,7 +18,7 @@ public class DriveSystem extends Subsystem implements PIDOutput {
 	// here. Call these from Commands.
 	private Talon leftfront = new Talon(0),
 			leftback = new Talon(1),
-			rightfront = new Talon(2),
+			rightfront = new Talon(4),
 			rightback = new Talon(3);
 	
 	//true = tank
