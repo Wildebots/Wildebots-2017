@@ -6,12 +6,14 @@ import org.usfirst.frc.team4902.robot.commands.Autonomous;
 import org.usfirst.frc.team4902.robot.commands.Rotate;
 import org.usfirst.frc.team4902.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4902.robot.subsystems.VisionSystem;
+import org.usfirst.frc.team4902.robot.subsystems.WinchSystem;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -26,6 +28,7 @@ public class Robot extends IterativeRobot {
 	public static ADXRS450_Gyro gyro;
 	
 	public static PowerDistributionPanel pdp;
+	public static WinchSystem winchsystem = new WinchSystem();
 
 	//	DriveCommand driveCommand;
 
