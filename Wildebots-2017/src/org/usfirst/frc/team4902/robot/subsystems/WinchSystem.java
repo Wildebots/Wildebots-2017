@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class WinchSystem extends Subsystem {
 
+	private double cutoff = 0.0f;
 	Talon winchController = new Talon(4);
 
 	@Override
@@ -20,5 +21,10 @@ public class WinchSystem extends Subsystem {
 	
 	public void update() {
 		
+	}
+	
+	public void setCutoff(double toSet)
+	{
+		cutoff  = toSet;
 	}
 }
