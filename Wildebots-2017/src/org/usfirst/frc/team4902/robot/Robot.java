@@ -10,6 +10,7 @@ import org.usfirst.frc.team4902.robot.subsystems.VisionSystem;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,15 +21,18 @@ public class Robot extends IterativeRobot {
 	public static DriverStation driverStation = DriverStation.getInstance();
 	public static DriveSystem driveSystem = new DriveSystem();
 
-	public static AtomicBoolean enabled = new AtomicBoolean(true);
+	public static AtomicBoolean enabled = new AtomicBoolean(true), currentCount = new AtomicBoolean(false);
 
-	public static ADXRS450_Gyro gyro;  
+	public static ADXRS450_Gyro gyro;
+	
+	public static PowerDistributionPanel pdp;
 
 	//	DriveCommand driveCommand;
 
 	@Override
 	public void robotInit() {
 		//		oi = new OI();
+		pdp = new PowerDistributionPanel();
 		gyro = new ADXRS450_Gyro();
 		//		VisionSystem.start();
 		SmartDashboard.putString("DB/String 0", "Robot Enabled");
@@ -48,6 +52,8 @@ public class Robot extends IterativeRobot {
 		}, Input.getPrimaryInstance().getButtonX(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> new Rotate(gyro.getAngle()+45).start(),
 				Input.getPrimaryInstance().getButtonB(), HandlerType.OnPress);
+		EventSystem.getInstance().addHandler(() -> currentCount.set(!currentCount.get()),
+				Input.getPrimaryInstance().getButtonA(), HandlerType.OnPress);
 	}
 
 	@Override
@@ -95,7 +101,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() 
 	{
 		Scheduler.getInstance().run();
-		if (isDebug()) System.out.println(gyro.getAngle());
+		if (isDebug() && currentCount.get()) System.out.println("current: "+pdp.getCurrent(0));
 	}
 
 	/**
