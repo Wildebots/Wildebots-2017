@@ -1,10 +1,8 @@
 package org.usfirst.frc.team4902.robot.subsystems;
 
-import org.usfirst.frc.team4902.robot.Input;
 import org.usfirst.frc.team4902.robot.Robot;
 
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class WinchSystem extends Subsystem {
@@ -13,6 +11,9 @@ public class WinchSystem extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
+		
+		//For testing and manual control of winch with joystick
+		
 //		setDefaultCommand(new Command() {
 //			{
 //				requires(Robot.winchsystem);
@@ -22,7 +23,8 @@ public class WinchSystem extends Subsystem {
 //			@Override
 //			protected void execute() {
 //				Robot.winchsystem.setSpeed(Input.getPrimaryInstance().getRightY());
-//				System.out.println(Input.getPrimaryInstance().getRightY() + " : " + Robot.winchsystem.getCurrent());
+//				if (Robot.winchsystem.getCurrent() > 0) 
+//					System.out.println(Input.getPrimaryInstance().getRightY() + " : " + Robot.winchsystem.getCurrent());
 //			}
 //			
 //			@Override

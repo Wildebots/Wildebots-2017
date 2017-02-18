@@ -1,7 +1,5 @@
 package org.usfirst.frc.team4902.robot.subsystems;
 
-import org.usfirst.frc.team4902.robot.commands.MailboxCommand;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Talon;
@@ -27,8 +25,17 @@ public class MailboxSystem extends Subsystem {
 		return controller;
 	}
 	
+	//Positive: up
+	//Negative: down
 	public void setSpeed(double speed) {
-		motor.set(speed);
+		//Ensure we're not going past our limits
+		if (encoder.get() > MAX_ENCODER_VALUE && speed > 0) {
+			motor.set(0);
+		} else if (encoder.get() < 0 && speed < 0) {
+			motor.set(0);
+		} else {
+			motor.set(speed);
+		}
 	}
 	
 	public void setTarget(double val) {
@@ -51,7 +58,7 @@ public class MailboxSystem extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new MailboxCommand());
+//		setDefaultCommand(new MailboxCommand());
 	}
 
 }

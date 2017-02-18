@@ -3,11 +3,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.usfirst.frc.team4902.robot.EventSystem.HandlerType;
 import org.usfirst.frc.team4902.robot.commands.Autonomous;
-import org.usfirst.frc.team4902.robot.commands.Rotate;
 import org.usfirst.frc.team4902.robot.commands.WinchCommand;
 import org.usfirst.frc.team4902.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4902.robot.subsystems.MailboxSystem;
-import org.usfirst.frc.team4902.robot.subsystems.VisionSystem;
 import org.usfirst.frc.team4902.robot.subsystems.WinchSystem;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -15,35 +13,28 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
-	//	public static OI oi;
 	public static DriverStation driverStation = DriverStation.getInstance();
 	public static DriveSystem driveSystem = new DriveSystem();
 	public static MailboxSystem mailbox = new MailboxSystem();
+	public static WinchSystem winchsystem = new WinchSystem();
+	
+	public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 	
 	public static AtomicBoolean enabled = new AtomicBoolean(true), currentCount = new AtomicBoolean(false);
 
-	public static ADXRS450_Gyro gyro;
+	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	
-	public static PowerDistributionPanel pdp;
-	public static WinchSystem winchsystem = new WinchSystem();
-
-	//	DriveCommand driveCommand;
-
 	@Override
 	public void robotInit() {
-		//		oi = new OI();
-		pdp = new PowerDistributionPanel();
-		gyro = new ADXRS450_Gyro();
 		//		VisionSystem.start();
 		SmartDashboard.putString("DB/String 0", "Robot Enabled");
 		EventSystem.getInstance().addHandler(() -> driveSystem.driveType.set(!driveSystem.driveType.get()),
-				Input.getPrimaryInstance().getButtonY(), HandlerType.OnPress);
+				Input.getPrimaryInstance().getRightBumper(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> {
 			if (!this.isDisabled()) {
 				if (enabled.get()) {
@@ -55,11 +46,19 @@ public class Robot extends IterativeRobot {
 				}
 				enabled.set(!enabled.get());
 			}
-		}, Input.getPrimaryInstance().getButtonX(), HandlerType.OnPress);
-		EventSystem.getInstance().addHandler(() -> new Rotate(gyro.getAngle()+45).start(),
-				Input.getPrimaryInstance().getButtonB(), HandlerType.OnPress);
+		}, Input.getPrimaryInstance().getLeftBumper(), HandlerType.OnPress);
+//		EventSystem.getInstance().addHandler(() -> new Rotate(gyro.getAngle()+45).start(),
+//				Input.getPrimaryInstance().getButtonB(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> new WinchCommand().start(),
+				Input.getPrimaryInstance().getButtonX(), HandlerType.OnPress);
+		
+		EventSystem.getInstance().addHandler(() -> mailbox.setTarget(0/*Top*/),
+				Input.getPrimaryInstance().getButtonY(), HandlerType.OnPress);
+		EventSystem.getInstance().addHandler(() -> mailbox.setTarget(0/*Middle*/),
+				Input.getPrimaryInstance().getButtonB(), HandlerType.OnPress);
+		EventSystem.getInstance().addHandler(() -> mailbox.setTarget(0/*Bottom*/),
 				Input.getPrimaryInstance().getButtonA(), HandlerType.OnPress);
+		
 	}
 
 	@Override

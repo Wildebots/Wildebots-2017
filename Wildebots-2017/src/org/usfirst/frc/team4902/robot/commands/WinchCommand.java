@@ -30,6 +30,6 @@ public class WinchCommand extends Command {
 	
 	@Override
 	protected void end() {
-		Robot.winchsystem.setSpeed(0);
+		Robot.winchsystem.stop();
 	}
 }
