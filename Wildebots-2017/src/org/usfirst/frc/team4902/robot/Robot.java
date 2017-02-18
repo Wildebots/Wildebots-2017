@@ -6,6 +6,7 @@ import org.usfirst.frc.team4902.robot.commands.Autonomous;
 import org.usfirst.frc.team4902.robot.commands.Rotate;
 import org.usfirst.frc.team4902.robot.commands.WinchCommand;
 import org.usfirst.frc.team4902.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team4902.robot.subsystems.MailboxSystem;
 import org.usfirst.frc.team4902.robot.subsystems.VisionSystem;
 import org.usfirst.frc.team4902.robot.subsystems.WinchSystem;
 
@@ -23,7 +24,8 @@ public class Robot extends IterativeRobot {
 	//	public static OI oi;
 	public static DriverStation driverStation = DriverStation.getInstance();
 	public static DriveSystem driveSystem = new DriveSystem();
-
+	public static MailboxSystem mailbox = new MailboxSystem();
+	
 	public static AtomicBoolean enabled = new AtomicBoolean(true), currentCount = new AtomicBoolean(false);
 
 	public static ADXRS450_Gyro gyro;
