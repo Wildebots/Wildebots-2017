@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveSystem extends Subsystem implements PIDOutput {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private Talon leftfront = new Talon(0),
-			leftback = new Talon(1),
+	private Talon leftfront = new Talon(2),
+			leftback = new Talon(3),
 			rightfront = new Talon(4),
-			rightback = new Talon(3);
+			rightback = new Talon(5);
 	
 	//true = tank
 	//false = false

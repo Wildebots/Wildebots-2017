@@ -50,10 +50,10 @@ public final class EventSystem extends Thread {
 			eventMap.put(button, new ArrayList<Handler>());
 			pressedMap.put(button, false);
 		});
-//		Input.getSecondaryInstance().getButtons().forEach(button -> {
-//			eventMap.put(button, new ArrayList<Handler>());
-//			pressedMap.put(button, false);
-//		});
+		Input.getSecondaryInstance().getButtons().forEach(button -> {
+			eventMap.put(button, new ArrayList<Handler>());
+			pressedMap.put(button, false);
+		});
 		this.start();
 	}
 

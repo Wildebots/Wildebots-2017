@@ -22,13 +22,13 @@ public class Robot extends IterativeRobot {
 	public static DriveSystem driveSystem = new DriveSystem();
 	public static MailboxSystem mailbox = new MailboxSystem();
 	public static WinchSystem winchsystem = new WinchSystem();
-	
+
 	public static PowerDistributionPanel pdp = new PowerDistributionPanel();
-	
+
 	public static AtomicBoolean enabled = new AtomicBoolean(true), currentCount = new AtomicBoolean(false);
 
 	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-	
+
 	@Override
 	public void robotInit() {
 		//		VisionSystem.start();
@@ -47,18 +47,20 @@ public class Robot extends IterativeRobot {
 				enabled.set(!enabled.get());
 			}
 		}, Input.getPrimaryInstance().getLeftBumper(), HandlerType.OnPress);
-//		EventSystem.getInstance().addHandler(() -> new Rotate(gyro.getAngle()+45).start(),
-//				Input.getPrimaryInstance().getButtonB(), HandlerType.OnPress);
+		EventSystem.getInstance().addHandler(() -> Robot.mailbox.resetEncoder(),
+				Input.getSecondaryInstance().getButtonX(), HandlerType.OnPress);
+		//		EventSystem.getInstance().addHandler(() -> new Rotate(gyro.getAngle()+45).start(),
+		//				Input.getPrimaryInstance().getButtonB(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> new WinchCommand().start(),
 				Input.getPrimaryInstance().getButtonX(), HandlerType.OnPress);
-		
-		EventSystem.getInstance().addHandler(() -> mailbox.setTarget(0/*Top*/),
+
+		EventSystem.getInstance().addHandler(() -> mailbox.setTarget(735/*Top*/),
 				Input.getPrimaryInstance().getButtonY(), HandlerType.OnPress);
-		EventSystem.getInstance().addHandler(() -> mailbox.setTarget(0/*Middle*/),
+		EventSystem.getInstance().addHandler(() -> mailbox.setTarget(300/*Middle*/),
 				Input.getPrimaryInstance().getButtonB(), HandlerType.OnPress);
 		EventSystem.getInstance().addHandler(() -> mailbox.setTarget(0/*Bottom*/),
 				Input.getPrimaryInstance().getButtonA(), HandlerType.OnPress);
-		
+
 	}
 
 	@Override
@@ -91,8 +93,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	@Override
-	public void teleopInit() 
-	{
+	public void teleopInit() {
 		//		if (autonomousCommand != null)
 		//		{
 		//			autonomousCommand.cancel();
