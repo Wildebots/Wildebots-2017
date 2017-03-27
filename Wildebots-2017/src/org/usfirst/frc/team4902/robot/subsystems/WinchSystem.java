@@ -16,25 +16,25 @@ public class WinchSystem extends Subsystem {
 		
 		//For testing and manual control of winch with joystick
 		
-		setDefaultCommand(new Command() {
-			{
-				requires(Robot.winchsystem);
-			}
-			
-			
-			@Override
-			protected void execute() {
-				Robot.winchsystem.setSpeed(Input.getSecondaryInstance().getLeftY());
-				if (Robot.winchsystem.getCurrent() > 0) 
-					System.out.println(Input.getSecondaryInstance().getLeftY() + " : " + Robot.winchsystem.getCurrent());
-			}
-			
-			@Override
-			protected boolean isFinished() {
-				// TODO Auto-generated method stub
-				return false;
-			}
-		});
+//		setDefaultCommand(new Command() {
+//			{
+//				requires(Robot.winchsystem);
+//			}
+//			
+//			
+//			@Override
+//			protected void execute() {
+//				Robot.winchsystem.setSpeed(Input.getSecondaryInstance().getLeftY());
+//				if (Robot.winchsystem.getCurrent() > 0) 
+//					System.out.println(Input.getSecondaryInstance().getLeftY() + " : " + Robot.winchsystem.getCurrent());
+//			}
+//			
+//			@Override
+//			protected boolean isFinished() {
+//				// TODO Auto-generated method stub
+//				return false;
+//			}
+//		});
 	}
 	
 	public void setSpeed(double speed) {
@@ -42,7 +42,7 @@ public class WinchSystem extends Subsystem {
 	}
 	
 	public double getCurrent() {
-		return Robot.pdp.getCurrent(6);
+		return Robot.pdp.getCurrent(1);
 	}
 	
 	public void stop() {

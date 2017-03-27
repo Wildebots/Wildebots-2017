@@ -7,19 +7,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class WinchCommand extends Command {
 	
+	double amp_break;
+	
 	public WinchCommand() {
 		requires(Robot.winchsystem);
+		amp_break = Double.parseDouble(SmartDashboard.getString("DB/String 2", "2"));
 	}
 
 	@Override
 	protected boolean isFinished() {
 //		return isTimedOut();
-		return isTimedOut() && Robot.winchsystem.getCurrent() > 2;
+		return isTimedOut() && Robot.winchsystem.getCurrent() > amp_break;
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.winchsystem.setSpeed(Double.parseDouble(SmartDashboard.getString("DB/String 1", "0")));
+		Robot.winchsystem.setSpeed(Double.parseDouble(SmartDashboard.getString("DB/String 1", "1")));
 		setTimeout(1);
 	}
 	

@@ -18,6 +18,7 @@ public class Rotate extends Command {
 	public Rotate(double target) {
 		requires(Robot.driveSystem);
 		this.target = target%360;
+		controller.setOutputRange(0, 0.75);
 	}
 	
 	@Override

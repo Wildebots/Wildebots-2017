@@ -19,8 +19,8 @@ import edu.wpi.first.wpilibj.vision.VisionPipeline;
 **/
 public class VisionSystem {
 
-	private static CameraServer cServer;
-	private static UsbCamera cam0;
+//	private static CameraServer cServer;
+//	private static UsbCamera cam0;
 	
 	public static class VPipeline implements VisionPipeline {
 
@@ -51,14 +51,12 @@ public class VisionSystem {
 	}
 	
 	public static void start() {
-		cServer = CameraServer.getInstance();
-		cam0 = cServer.startAutomaticCapture();
-		
-		CvSink sink = cServer.getVideo(cam0);
-		
-		CvSource source = cServer.putVideo("Final Image", 640, 480);
-		
-		cam0.setFPS(16);
+		CameraServer.getInstance().startAutomaticCapture();
+//		CvSink sink = cServer.getVideo(cam0);
+//		
+//		CvSource source = cServer.putVideo("Final Image", 640, 480);
+//		
+//		cam0.setFPS(16);
 		
 		
 		
@@ -66,11 +64,11 @@ public class VisionSystem {
 		
 //		source.putFrame(img);
 		
-		new Thread(() -> {
-			Mat img = new Mat();
-			sink.grabFrame(img);
-			source.putFrame(img);
-		}).start();
+//		new Thread(() -> {
+//			Mat img = new Mat();
+//			sink.grabFrame(img);
+//			source.putFrame(img);
+//		}).start();
 		
 //		VisionThread tr = new VisionThread(cam0, new VPipeline(), new Listener<VPipeline>() {
 //			CvSource out = cServer.putVideo("Final Image", 640, 480);

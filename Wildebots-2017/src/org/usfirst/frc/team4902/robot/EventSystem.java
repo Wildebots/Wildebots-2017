@@ -3,7 +3,9 @@ package org.usfirst.frc.team4902.robot;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public final class EventSystem extends Thread {
 
@@ -50,41 +52,43 @@ public final class EventSystem extends Thread {
 			eventMap.put(button, new ArrayList<Handler>());
 			pressedMap.put(button, false);
 		});
-		Input.getSecondaryInstance().getButtons().forEach(button -> {
-			eventMap.put(button, new ArrayList<Handler>());
-			pressedMap.put(button, false);
-		});
+		//		Input.getSecondaryInstance().getButtons().forEach(button -> {
+		//			eventMap.put(button, new ArrayList<Handler>());
+		//			pressedMap.put(button, false);
+		//		});
 		this.start();
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			eventMap.keySet().forEach(button -> {
-				if (button.get()) {
-					eventMap.get(button).forEach(handler -> {
-						if (handler.getType().equals(HandlerType.OnPress)) {
-							if (!pressedMap.get(button)) {
+			if (!DriverStation.getInstance().isDisabled()) {
+				eventMap.keySet().forEach(button -> {
+					if (button.get()) {
+						eventMap.get(button).forEach(handler -> {
+							if (handler.getType().equals(HandlerType.OnPress)) {
+								if (!pressedMap.get(button)) {
+									handler.getRunnable().run();
+								}
+							} else if (handler.getType().equals(HandlerType.WhilePressed)) {
+								handler.getRunnable().run();
+							} else if (!handler.getType().equals(HandlerType.OnRelease)) {
 								handler.getRunnable().run();
 							}
-						} else if (handler.getType().equals(HandlerType.WhilePressed)) {
-							handler.getRunnable().run();
-						} else if (!handler.getType().equals(HandlerType.OnRelease)) {
-							handler.getRunnable().run();
-						}
-					});
-					pressedMap.put(button, true);
-				} else if (!button.get()) {
-					eventMap.get(button).forEach(handler -> {
-						if (handler.getType().equals(HandlerType.OnRelease)) {
-							if (pressedMap.get(button)) {
-								handler.getRunnable().run();
+						});
+						pressedMap.put(button, true);
+					} else if (!button.get()) {
+						eventMap.get(button).forEach(handler -> {
+							if (handler.getType().equals(HandlerType.OnRelease)) {
+								if (pressedMap.get(button)) {
+									handler.getRunnable().run();
+								}
 							}
-						}
-					});
-					pressedMap.put(button, false);
-				}
-			});
+						});
+						pressedMap.put(button, false);
+					}
+				});
+			}
 		}
 	}
 

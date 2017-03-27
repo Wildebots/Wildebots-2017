@@ -34,7 +34,7 @@ public final class Input {
 
 	// Instance of this class
 	private static Input primaryInstance = new Input(0);
-	private static Input secondaryInstance = new Input(1);
+//	private static Input secondaryInstance = new Input(1);
 
 	/**
 	 * Useless shit made by George to make life more difficult, but you have to use it to access Input methods
@@ -44,9 +44,9 @@ public final class Input {
 		return primaryInstance;
 	}
 
-	public static Input getSecondaryInstance() {
-		return secondaryInstance;
-	}
+//	public static Input getSecondaryInstance() {
+//		return secondaryInstance;
+//	}
 
 	public int getJoystickNumber(){
 		return stickPort+1;

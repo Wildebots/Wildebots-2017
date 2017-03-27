@@ -14,7 +14,7 @@ public class MailboxCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.mailbox.setSpeed(Input.getSecondaryInstance().getRightY());
+//		Robot.mailbox.setSpeed(Input.getSecondaryInstance().getRightY());
 	}
 
 	@Override
