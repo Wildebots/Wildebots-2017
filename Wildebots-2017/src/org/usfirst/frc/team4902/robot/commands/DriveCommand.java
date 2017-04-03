@@ -26,7 +26,8 @@ public class DriveCommand extends Command {
 		if (Robot.driveSystem.driveType.get()/*SmartDashboard.getBoolean("DB/Button 0", true)*/) {
 			Robot.driveSystem.getDrive().tankDrive(Input.getPrimaryInstance().getRawAxis(1), Input.getPrimaryInstance().getRawAxis(5));
 		} else {
-			Robot.driveSystem.getDrive().arcadeDrive(Input.getPrimaryInstance().getJoystick());
+			Robot.driveSystem.getDrive().arcadeDrive(Input.getPrimaryInstance().getLeftY(), Input.getPrimaryInstance().getLeftX());
+//			Robot.driveSystem.getDrive().arcadeDrive(Input.getPrimaryInstance().getJoystick());
 		}
 	}
 

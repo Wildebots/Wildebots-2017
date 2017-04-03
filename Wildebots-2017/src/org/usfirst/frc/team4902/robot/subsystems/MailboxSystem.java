@@ -17,7 +17,7 @@ public class MailboxSystem extends Subsystem {
 	
 	public static final double MAX_ENCODER_VALUE = 800;
 	
-	public static final double PID_TOLERANCE = 0.05;
+	public static final double PID_TOLERANCE = 5;
 
 	//0.1 0 0.02
 	
@@ -49,6 +49,8 @@ public class MailboxSystem extends Subsystem {
 	
 	public void resetEncoder() {
 		encoder.reset();
+		controller.reset();
+		
 	}
 	
 	public void setTarget(double val) {

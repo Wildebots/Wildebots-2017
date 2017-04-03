@@ -38,6 +38,7 @@ public final class Input {
 
 	/**
 	 * Useless shit made by George to make life more difficult, but you have to use it to access Input methods
+	 * -Gunvir Ranu
 	 * @return Instance of the Input class
 	 */
 	public static Input getPrimaryInstance() {
